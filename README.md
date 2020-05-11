@@ -9,13 +9,12 @@ After that the focus is purely on
 - deploying containers in Kubernetes
 
 ## Contents
-- [Core Concepts - 13%](a.core_concepts.md)
-- [Multi-container pods - 10%](b.multi_container_pods.md)
-- [Deployments and Jobs - 20%](c.deployments_jobs.md)
-- [Configuration - 18%](d.configuration.md)
-- [Observability - 18%](e.observability.md)
-- [Services and networking - 13%](f.services.md)
-- [State persistence - 8%](g.state.md)
+- [Core Concepts](a.core_concepts.md)
+- [Deployments and Jobs](c.deployments_jobs.md)
+- [Configuration](d.configuration.md)
+- [Observability](e.observability.md)
+- [Services and networking](f.services.md)
+- [State persistence](g.state.md)
 
 ## What it not covered
 - how to write Dockerfiles
