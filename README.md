@@ -11,7 +11,7 @@ After that the focus is purely on
 ## Contents
 - [Core Concepts - 13%](a.core_concepts.md)
 - [Multi-container pods - 10%](b.multi_container_pods.md)
-- [Pod design - 20%](c.pod_design.md)
+- [Deployments and Jobs - 20%](c.deployments_jobs.md)
 - [Configuration - 18%](d.configuration.md)
 - [Observability - 18%](e.observability.md)
 - [Services and networking - 13%](f.services.md)
