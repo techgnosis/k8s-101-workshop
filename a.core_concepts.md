@@ -1,4 +1,4 @@
-# Core Concepts (13%)
+# Core Concepts
 
 kubernetes.io > Documentation > Reference > kubectl CLI > [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 

@@ -1,4 +1,4 @@
-# State Persistence (8%)
+# State Persistence
 
 kubernetes.io > Documentation > Tasks > Configure Pods and Containers > [Configure a Pod to Use a Volume for Storage](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/)
 

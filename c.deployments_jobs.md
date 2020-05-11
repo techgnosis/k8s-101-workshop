@@ -1,4 +1,4 @@
-# Deployments and Jobs (20%)
+# Deployments and Jobs
 
 ## Deployments
 

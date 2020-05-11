@@ -1,4 +1,4 @@
-# Configuration (18%)
+# Configuration
 
 ## ConfigMaps
 
