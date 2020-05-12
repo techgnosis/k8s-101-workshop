@@ -1,4 +1,4 @@
-# Observability (18%)
+# Observability
 
 ## Liveness and readiness probes
 

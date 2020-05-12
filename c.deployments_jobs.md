@@ -1,190 +1,13 @@
-# Pod design (20%)
-
-## Labels and annotations
-kubernetes.io > Documentation > Concepts > Overview > [Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors)
-
-### Create 3 pods with names nginx1,nginx2,nginx3. All of them should have the label app=v1
-
-<details><summary>show</summary>
-<p>
-
-```bash
-kubectl run nginx1 --image=nginx --restart=Never --labels=app=v1
-kubectl run nginx2 --image=nginx --restart=Never --labels=app=v1
-kubectl run nginx3 --image=nginx --restart=Never --labels=app=v1
-```
-
-</p>
-</details>
-
-### Show all labels of the pods
-
-<details><summary>show</summary>
-<p>
-
-```bash
-kubectl get po --show-labels
-```
-
-</p>
-</details>
-
-### Change the labels of pod 'nginx2' to be app=v2
-
-<details><summary>show</summary>
-<p>
-
-```bash
-kubectl label po nginx2 app=v2 --overwrite
-```
-
-</p>
-</details>
-
-### Get the label 'app' for the pods
-
-<details><summary>show</summary>
-<p>
-
-```bash
-kubectl get po -L app
-# or
-kubectl get po --label-columns=app
-```
-
-</p>
-</details>
-
-### Get only the 'app=v2' pods
-
-<details><summary>show</summary>
-<p>
-
-```bash
-kubectl get po -l app=v2
-# or
-kubectl get po -l 'app in (v2)'
-# or
-kubectl get po --selector=app=v2
-```
-
-</p>
-</details>
-
-### Remove the 'app' label from the pods we created before
-
-<details><summary>show</summary>
-<p>
-
-```bash
-kubectl label po nginx1 nginx2 nginx3 app-
-# or
-kubectl label po nginx{1..3} app-
-# or
-kubectl label po -lapp app-
-```
-
-</p>
-</details>
-
-### Create a pod that will be deployed to a Node that has the label 'accelerator=nvidia-tesla-p100'
-
-<details><summary>show</summary>
-<p>
-
-We can use the 'nodeSelector' property on the Pod YAML:
-
-```YAML
-apiVersion: v1
-kind: Pod
-metadata:
-  name: cuda-test
-spec:
-  containers:
-    - name: cuda-test
-      image: "k8s.gcr.io/cuda-vector-add:v0.1"
-  nodeSelector: # add this
-    accelerator: nvidia-tesla-p100 # the selection label
-```
-
-You can easily find out where in the YAML it should be placed by:
-
-```bash
-kubectl explain po.spec
-```
-
-</p>
-</details>
-
-### Annotate pods nginx1, nginx2, nginx3 with "description='my description'" value
-
-<details><summary>show</summary>
-<p>
-
-
-```bash
-kubectl annotate po nginx1 nginx2 nginx3 description='my description'
-
-#or
-
-kubectl annotate po nginx{1..3} description='my description'
-```
-
-</p>
-</details>
-
-### Check the annotations for pod nginx1
-
-<details><summary>show</summary>
-<p>
-
-```bash
-kubectl describe po nginx1 | grep -i 'annotations'
-```
-
-As an alternative to using `| grep` you can use jsonPath like `kubectl get po nginx -o jsonpath='{.metadata.annotations}{"\n"}'`
-
-</p>
-</details>
-
-### Remove the annotations for these three pods
-
-<details><summary>show</summary>
-<p>
-
-```bash
-kubectl annotate po nginx{1..3} description-
-```
-
-</p>
-</details>
-
-### Remove these pods to have a clean state in your cluster
-
-<details><summary>show</summary>
-<p>
-
-```bash
-kubectl delete po nginx{1..3}
-```
-
-</p>
-</details>
+# Deployments and Jobs
 
 ## Deployments
 
 kubernetes.io > Documentation > Concepts > Workloads > Controllers > [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment)
 
-### Create a deployment with image nginx:1.7.8, called nginx, having 2 replicas, defining port 80 as the port that this container exposes (don't create a service for this deployment)
+### Create a deployment with image nginx:1.7.8, called nginx, having 2 replicas, defining port 80 as the port that this container exposes
 
 <details><summary>show</summary>
 <p>
-
-```bash
-kubectl run nginx --image=nginx:1.7.8 --replicas=2 --port=80
-```
-
-**However**, `kubectl run` for Deployments is Deprecated and will be removed in a future version. What you can do is:
 
 ```bash
 kubectl create deployment nginx  --image=nginx:1.7.8  --dry-run -o yaml > deploy.yaml
@@ -308,7 +131,7 @@ kubectl describe po nginx-5ff4457d65-nslcl | grep -i image # should be nginx:1.7
 </p>
 </details>
 
-### Do an on purpose update of the deployment with a wrong image nginx:1.91
+### Do an update of the deployment with an incorrect image nginx:1.91
 
 <details><summary>show</summary>
 <p>
@@ -324,7 +147,7 @@ kubectl edit deploy nginx
 </p>
 </details>
 
-### Verify that something's wrong with the rollout
+### Verify that something is wrong with the rollout
 
 <details><summary>show</summary>
 <p>
@@ -379,7 +202,7 @@ kubectl describe deploy nginx
 </p>
 </details>
 
-### Autoscale the deployment, pods between 5 and 10, targetting CPU utilization at 80%
+### Autoscale the deployment to between 5 and 10, targetting CPU utilization at 80%
 
 <details><summary>show</summary>
 <p>
@@ -456,19 +279,13 @@ kubectl delete deploy/nginx hpa/nginx
 <p>
 
 ```bash
-kubectl run pi --image=perl --restart=OnFailure -- perl -Mbignum=bpi -wle 'print bpi(2000)'
-```
-
-**However**, `kubectl run` for Job is Deprecated and will be removed in a future version. What you can do is:
-
-```bash
 kubectl create job pi  --image=perl -- perl -Mbignum=bpi -wle 'print bpi(2000)'
 ```
 
 </p>
 </details>
 
-### Wait till it's done, get the output
+### Wait until it is done and get the output
 
 <details><summary>show</summary>
 <p>
@@ -487,12 +304,6 @@ kubectl delete job pi
 
 <details><summary>show</summary>
 <p>
-
-```bash
-kubectl run busybox --image=busybox --restart=OnFailure -- /bin/sh -c 'echo hello;sleep 30;echo world'
-```
-
-**However**, `kubectl run` for Job is Deprecated and will be removed in a future version. What you can do is:
 
 ```bash
 kubectl create job busybox --image=busybox -- /bin/sh -c 'echo hello;sleep 30;echo world'
@@ -582,7 +393,7 @@ status: {}
 </p>
 </details>
 
-### Create the same job, make it run 5 times, one after the other. Verify its status and delete it
+### Create the same job and make it run 5 times, one after the other. Verify its status and delete it
 
 <details><summary>show</summary>
 <p>
@@ -636,7 +447,7 @@ kubectl delete jobs busybox
 </p>
 </details>
 
-### Create the same job, but make it run 5 parallel times
+### Create the same job, but make it run 5 times in parallel
 
 <details><summary>show</summary>
 <p>
@@ -697,12 +508,6 @@ kubernetes.io > Documentation > Tasks > Run Jobs > [Running Automated Tasks with
 
 <details><summary>show</summary>
 <p>
-
-```bash
-kubectl run busybox --image=busybox --restart=OnFailure --schedule="*/1 * * * *" -- /bin/sh -c 'date; echo Hello from the Kubernetes cluster'
-```
-
-**However**, `kubectl run` for CronJob is Deprecated and will be removed in a future version. What you can do is:
 
 ```bash
 kubectl create cronjob busybox --image=busybox --schedule="*/1 * * * *" -- /bin/sh -c 'date; echo Hello from the Kubernetes cluster'

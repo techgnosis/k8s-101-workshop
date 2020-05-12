@@ -6,13 +6,11 @@ Kubernetes is the most popular platform for deploying containers. This workshop 
 
 After that the focus is purely on
 - what Kubernetes is
-- and how to deploy containers in Kubernetes
+- deploying containers in Kubernetes
 
 ## Contents
-- [Getting Started](getting_started.md)
 - [Core Concepts](a.core_concepts.md)
-- [Multi-container pods](b.multi_container_pods.md)
-- [Pod design ](c.pod_design.md)
+- [Deployments and Jobs](c.deployments_jobs.md)
 - [Configuration](d.configuration.md)
 - [Observability](e.observability.md)
 - [Services and networking](f.services.md)
