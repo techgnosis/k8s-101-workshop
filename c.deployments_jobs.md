@@ -10,12 +10,6 @@ kubernetes.io > Documentation > Concepts > Workloads > Controllers > [Deployment
 <p>
 
 ```bash
-kubectl run nginx --image=nginx:1.7.8 --replicas=2 --port=80
-```
-
-**However**, `kubectl run` for Deployments is Deprecated and will be removed in a future version. What you can do is:
-
-```bash
 kubectl create deployment nginx  --image=nginx:1.7.8  --dry-run -o yaml > deploy.yaml
 vi deploy.yaml
 # change the replicas field from 1 to 2
@@ -285,12 +279,6 @@ kubectl delete deploy/nginx hpa/nginx
 <p>
 
 ```bash
-kubectl run pi --image=perl --restart=OnFailure -- perl -Mbignum=bpi -wle 'print bpi(2000)'
-```
-
-**However**, `kubectl run` for Job is Deprecated and will be removed in a future version. What you can do is:
-
-```bash
 kubectl create job pi  --image=perl -- perl -Mbignum=bpi -wle 'print bpi(2000)'
 ```
 
@@ -316,12 +304,6 @@ kubectl delete job pi
 
 <details><summary>show</summary>
 <p>
-
-```bash
-kubectl run busybox --image=busybox --restart=OnFailure -- /bin/sh -c 'echo hello;sleep 30;echo world'
-```
-
-**However**, `kubectl run` for Job is Deprecated and will be removed in a future version. What you can do is:
 
 ```bash
 kubectl create job busybox --image=busybox -- /bin/sh -c 'echo hello;sleep 30;echo world'
@@ -526,12 +508,6 @@ kubernetes.io > Documentation > Tasks > Run Jobs > [Running Automated Tasks with
 
 <details><summary>show</summary>
 <p>
-
-```bash
-kubectl run busybox --image=busybox --restart=OnFailure --schedule="*/1 * * * *" -- /bin/sh -c 'date; echo Hello from the Kubernetes cluster'
-```
-
-**However**, `kubectl run` for CronJob is Deprecated and will be removed in a future version. What you can do is:
 
 ```bash
 kubectl create cronjob busybox --image=busybox --schedule="*/1 * * * *" -- /bin/sh -c 'date; echo Hello from the Kubernetes cluster'
