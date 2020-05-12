@@ -9,6 +9,8 @@ After that the focus is purely on
 - deploying containers in Kubernetes
 
 ## Contents
+- [Getting Started](getting_started.md)
+- [Creating a Container](creating_a_container.md)
 - [Core Concepts](a.core_concepts.md)
 - [Deployments and Jobs](c.deployments_jobs.md)
 - [Configuration](d.configuration.md)
