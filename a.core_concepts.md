@@ -1,4 +1,4 @@
-# Core Concepts (13%)
+# Core Concepts
 
 kubernetes.io > Documentation > Reference > kubectl CLI > [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 
@@ -10,13 +10,15 @@ kubernetes.io > Documentation > Tasks > Access Applications in a Cluster > [Acce
 
 kubernetes.io > Documentation > Tasks > Access Applications in a Cluster > [Use Port Forwarding to Access Applications in a Cluster](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
 
-### Create a namespace called 'mynamespace' and a pod with image nginx called nginx on this namespace
+
+**all of these below commands should be run in your namespace**
+
+### Create a pod with image nginx called nginx 
 
 <details><summary>show</summary>
 <p>
 
 ```bash
-kubectl create namespace mynamespace
 kubectl run nginx --image=nginx --restart=Never -n mynamespace
 ```
 
