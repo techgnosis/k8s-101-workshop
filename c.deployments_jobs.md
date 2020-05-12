@@ -4,7 +4,7 @@
 
 kubernetes.io > Documentation > Concepts > Workloads > Controllers > [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment)
 
-### Create a deployment with image nginx:1.7.8, called nginx, having 2 replicas, defining port 80 as the port that this container exposes (don't create a service for this deployment)
+### Create a deployment with image nginx:1.7.8, called nginx, having 2 replicas, defining port 80 as the port that this container exposes
 
 <details><summary>show</summary>
 <p>
@@ -137,7 +137,7 @@ kubectl describe po nginx-5ff4457d65-nslcl | grep -i image # should be nginx:1.7
 </p>
 </details>
 
-### Do an on purpose update of the deployment with a wrong image nginx:1.91
+### Do an update of the deployment with an incorrect image nginx:1.91
 
 <details><summary>show</summary>
 <p>
@@ -153,7 +153,7 @@ kubectl edit deploy nginx
 </p>
 </details>
 
-### Verify that something's wrong with the rollout
+### Verify that something is wrong with the rollout
 
 <details><summary>show</summary>
 <p>
@@ -208,7 +208,7 @@ kubectl describe deploy nginx
 </p>
 </details>
 
-### Autoscale the deployment, pods between 5 and 10, targetting CPU utilization at 80%
+### Autoscale the deployment to between 5 and 10, targetting CPU utilization at 80%
 
 <details><summary>show</summary>
 <p>
@@ -297,7 +297,7 @@ kubectl create job pi  --image=perl -- perl -Mbignum=bpi -wle 'print bpi(2000)'
 </p>
 </details>
 
-### Wait till it's done, get the output
+### Wait until it is done and get the output
 
 <details><summary>show</summary>
 <p>
@@ -411,7 +411,7 @@ status: {}
 </p>
 </details>
 
-### Create the same job, make it run 5 times, one after the other. Verify its status and delete it
+### Create the same job and make it run 5 times, one after the other. Verify its status and delete it
 
 <details><summary>show</summary>
 <p>
@@ -465,7 +465,7 @@ kubectl delete jobs busybox
 </p>
 </details>
 
-### Create the same job, but make it run 5 parallel times
+### Create the same job, but make it run 5 times in parallel
 
 <details><summary>show</summary>
 <p>
