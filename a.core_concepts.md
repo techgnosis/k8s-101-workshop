@@ -22,6 +22,11 @@ kubernetes.io > Documentation > Tasks > Access Applications in a Cluster > [Use 
 kubectl run nginx --image=nginx --restart=Never -n mynamespace
 ```
 
+Delete the pod
+```bash
+kubectl delete pod nginx
+```
+
 </p>
 </details>
 
@@ -68,7 +73,10 @@ Alternatively, you can run in one line
 ```bash
 kubectl run nginx --image=nginx --restart=Never --dry-run -o yaml | kubectl create -n mynamespace -f -
 ```
-
+Delete the pod
+```bash
+kubectl delete pod nginx
+```
 </p>
 </details>
 
@@ -83,6 +91,11 @@ kubectl run busybox --image=busybox --command --restart=Never -it -- env # -it w
 kubectl run busybox --image=busybox --command --restart=Never -- env
 # and then, check its logs
 kubectl logs busybox
+```
+
+Delete the pod
+```bash
+kubectl delete pod busybox
 ```
 
 </p>
@@ -126,6 +139,11 @@ kubectl apply -f envpod.yaml
 kubectl logs busybox
 ```
 
+
+Delete the pod
+```bash
+kubectl delete pod busybox
+```
 </p>
 </details>
 
@@ -286,6 +304,10 @@ kubectl run busybox --image=busybox -it --restart=Never -- echo 'hello world'
 kubectl run busybox --image=busybox -it --restart=Never -- /bin/sh -c 'echo hello world'
 ```
 
+Delete the pod
+```bash
+kubectl delete pod busybox
+```
 </p>
 </details>
 
