@@ -5,7 +5,7 @@
 ### connect to the workshop cluster
 
 ```
-pks get-kubeconfig <cluster-name> -a <your-pks-api> -u kuber<number> -p <password> -k
+pks get-kubeconfig workshop -a <your-pks-api> -u kuber<number> -p <password> -k
 ```
 
 ### verify connection to the k8s cluster
